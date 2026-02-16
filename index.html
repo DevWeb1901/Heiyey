@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HEIYEY STORE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+  font-family: Arial;
+  background: linear-gradient(to bottom,#ffffff,#cce0ff);
+  text-align:center;
+  margin:0;
+}
+
+/* 🔥 LOADING SCREEN */
+#loading{
+  position:fixed;
+  background:white;
+  width:100%;
+  height:100%;
+  top:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:999;
+}
+
+.banner{
+  width:100%;
+  border-radius:12px;
+}
+
+.header{
+  font-size:28px;
+  color:#0066ff;
+  font-weight:bold;
+  padding:15px;
+}
+
+.box{
+  background:white;
+  margin:15px;
+  padding:15px;
+  border-radius:15px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+select,input,button{
+  width:90%;
+  padding:12px;
+  margin:8px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+button{
+  background:#0066ff;
+  color:white;
+  font-weight:bold;
+  border:none;
+}
+
+.avatar{
+  width:100px;
+  border-radius:50%;
+  margin:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 LOADING -->
+<div id="loading">
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.svg" width="120">
+<h3 style="color:#0066ff">Loading HEIYEY STORE...</h3>
+</div>
+
+<!-- ⭐ BANNER -->
+<img id="banner" src="banner-robux.jpg" class="banner">
+
+<div class="header">💙 HEIYEY STORE 💙</div>
+
+<div class="box">
+
+<h3>Pilih Kategori</h3>
+
+<select id="kategori" onchange="gantiBanner()">
+<option value="robux">Robux</option>
+<option value="brookhaven">Gamepass Brookhaven</option>
+<option value="mm2">Sword MM2</option>
+<option value="stk">Sword STK</option>
+</select>
+
+<h3>Pilih Produk</h3>
+<select id="produk"></select>
+
+<h3>Username Roblox</h3>
+<input type="text" id="user" placeholder="Masukkan username" oninput="loadAvatar()">
+
+<img id="avatar" class="avatar" style="display:none">
+
+<button onclick="beli()">BELI SEKARANG</button>
+
+</div>
+
+<script>
+
+/* 🔥 HILANGKAN LOADING */
+setTimeout(()=>{document.getElementById("loading").style.display="none";},2000);
+
+/* ⭐ DEFAULT PRODUK */
+gantiBanner();
+
+function gantiBanner(){
+  var kategori = document.getElementById("kategori").value;
+  var banner = document.getElementById("banner");
+  var produk = document.getElementById("produk");
+
+  if(kategori=="robux"){
+    banner.src="banner-robux.jpg";
+    produk.innerHTML=`
+      <option>Robux 100 — 15k</option>
+      <option>Robux 200 — 30k</option>
+      <option>Robux 300 — 45k</option>
+      <option>Robux 1000 — 150k</option>
+    `;
+  }
+
+  if(kategori=="brookhaven"){
+    banner.src="banner-brookhaven.jpg";
+    produk.innerHTML=`
+      <option>Penthouse — 25k</option>
+      <option>Music — 30k</option>
+      <option>Speed — 30k</option>
+      <option>Premium — 50k</option>
+      <option>Vehicle — 110k</option>
+      <option>VIP — 140k</option>
+    `;
+  }
+
+  if(kategori=="mm2"){
+    banner.src="banner-mm2.jpg";
+    produk.innerHTML=`
+      <option>Darkbringer — 20k</option>
+      <option>Lightbringer — 40k</option>
+      <option>Chroma Laser — 17k</option>
+      <option>Chroma Seer — 29k</option>
+      <option>Virtual — 10k</option>
+    `;
+  }
+
+  if(kategori=="stk"){
+    banner.src="banner-stk.jpg";
+    produk.innerHTML=`
+      <option>Astral — 8k</option>
+      <option>Bunnybane — 8k</option>
+      <option>Amber Riptar — 10k</option>
+      <option>Cactus — 40k</option>
+      <option>Wand of the Void — 40k</option>
+      <option>The Butcher's Cleaver — 49k</option>
+      <option>Grimsley's Buster — 45k</option>
+      <option>Noctis AEterna — 95k</option>
+    `;
+  }
+}
+
+/* 💙 AVATAR ROBLOX */
+function loadAvatar(){
+  var user = document.getElementById("user").value;
+  var avatar = document.getElementById("avatar");
+
+  if(user.length < 3){
+    avatar.style.display="none";
+    return;
+  }
+
+  avatar.src = "https://robohash.org/" + user + "?set=set5";
+  avatar.style.display="block";
+}
+
+/* 💙 BELI */
+function beli(){
+  var produk = document.getElementById("produk").value;
+  var user = document.getElementById("user").value;
+
+  if(user==""){
+    alert("Isi username dulu!");
+    return;
+  }
+
+  var pesan = "Halo kak, saya mau beli:\n"
+            + produk + "\nUsername: " + user;
+
+  window.open("https://wa.me/6287897493566?text=" + encodeURIComponent(pesan));
+}
+
+</script>
+
+</body>
+</html>
